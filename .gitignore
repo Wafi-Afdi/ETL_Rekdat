@@ -2,3 +2,5 @@
 env_name
 env
 .tmp
+.vscode
+*.pem
