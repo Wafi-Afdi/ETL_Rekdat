@@ -9,6 +9,7 @@ import os
 load_dotenv()
 
 FILE_PATH = os.getenv('FILE_PATH')
+STOCK_SYMBOL= os.getenv('STOCK_SYMBOL')
 
 db_config = {
     "dbname": os.getenv('DB_NAME'),
@@ -59,6 +60,7 @@ def main():
     merged_data["initialprice"] = merged_data["initialprice"].astype(float) / 100
     merged_data["release_date"] = pd.to_datetime(merged_data["release_date"])
     merged_data = merged_data.where(pd.notnull(merged_data), None)  # Replace NaN with None
+    merged_data["stock_symbol"] = STOCK_SYMBOL
 
     # Process genres and languages
     def process_column_data(merged_data, column_name, new_column_name):

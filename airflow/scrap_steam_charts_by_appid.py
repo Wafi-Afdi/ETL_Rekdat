@@ -61,7 +61,7 @@ def scrape_steamcharts_batch(app_ids):
 # List of app IDs to scrape
 # Load the cleaned JSON data
 def main():
-    with open('cleaned_data.json', 'r') as f:
+    with open(os.path.join(FILE_PATH, "scraped_steam_data.json"), 'r') as f:
         cleaned_data = json.load(f)
     
     # Convert JSON to DataFrame

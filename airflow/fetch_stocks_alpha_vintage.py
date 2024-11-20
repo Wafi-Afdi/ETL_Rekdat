@@ -11,7 +11,7 @@ FILE_PATH = os.getenv('FILE_PATH')
 # Replace with your Alpha Vantage API key
 ALPHA_VANTAGE_API_KEY = os.getenv('API_KEY_ALPHA')
 ALPHA_VANTAGE_URL = "https://www.alphavantage.co/query"
-COMPANY_SYMBOL="DEVO.L"
+COMPANY_SYMBOL=os.getenv('STOCK_SYMBOl')
 
 def extract_stock_price_daily(symbol="EA"):
     """

@@ -15,8 +15,7 @@ db_config = {
     "password": os.getenv('DB_PASSWORD'),
     "host": os.getenv('DB_HOST'),
     "port": os.getenv('DB_PORT'),
-    "sslmode": os.getenv("PG_SSLMODE", "verify-ca"),
-    "sslrootcert": os.getenv("PATH_TO_CA", "/path/to/ca.pem"),
+    "sslmode": "require"
 }
 
 # Fungsi untuk membuat tabel
@@ -79,17 +78,19 @@ def insert_data_to_table(conn, df, table_name):
 
 
 
-# Baca data dari file CSV hasil transformasi
-daily_input = os.path.join(FILE_PATH, 'transformed_daily_data_with_date.csv')
-monthly_input = os.path.join(FILE_PATH, 'transformed_monthly_data_with_date.csv')
 
-daily_df = pd.read_csv(daily_input)
-monthly_df = pd.read_csv(monthly_input)
+
 
 def main():
     # Koneksi ke database PostgreSQL
+    # Baca data dari file CSV hasil transformasi
+    daily_input = os.path.join(FILE_PATH, 'transformed_daily_data_with_date.csv')
+    monthly_input = os.path.join(FILE_PATH, 'transformed_monthly_data_with_date.csv')
+    daily_df = pd.read_csv(daily_input)
+    monthly_df = pd.read_csv(monthly_input)
+    conn = psycopg2.connect(**db_config)
     try:
-        conn = psycopg2.connect(**db_config)
+        
         print("Berhasil terhubung ke database.")
     
         # Membuat tabel jika belum ada

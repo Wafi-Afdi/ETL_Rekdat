@@ -18,7 +18,8 @@ CREATE TABLE steam_game (
     ccu INT,                           -- Asumsi tipe data untuk ccu
     link TEXT,                          -- Link terkait
     title VARCHAR(255),                -- Judul game
-    release_date DATE                  -- Tanggal rilis
+    release_date DATE,                  -- Tanggal rilis
+    stock_symbol VARCHAR(255)
 );
 
 CREATE TABLE IF NOT EXISTS stock_monthly (

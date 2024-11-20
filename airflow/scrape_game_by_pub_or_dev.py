@@ -12,6 +12,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 FILE_PATH = os.getenv('FILE_PATH')
+STOCK_SYMBOL= os.getenv('STOCK_SYMBOL')
+URL_PUB=os.getenv('URL_STEAM_PUB')
 
 
 def infinite_scroll(driver, pause_time=3):
@@ -79,7 +81,7 @@ def scrape_any_publisher(URL_site):
 
 def main():
     # Run the scraper
-    games = scrape_any_publisher("https://store.steampowered.com/publisher/DevolverDigital/#browse")
+    games = scrape_any_publisher(URL_PUB)
     
     # turn to json
     df = pd.DataFrame(games)
