@@ -106,4 +106,4 @@ def main():
             conn.close()
             print("Koneksi ke database ditutup.")
 
-main()
+# main()

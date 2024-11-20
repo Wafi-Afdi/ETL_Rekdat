@@ -96,4 +96,4 @@ def main():
     with open(scraped_data_path, 'w') as f:
         json.dump(scraped_json, f, indent=4)
 
-main()
+# main()

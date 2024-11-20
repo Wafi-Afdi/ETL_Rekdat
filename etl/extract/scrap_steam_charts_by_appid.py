@@ -75,4 +75,4 @@ def main():
     # Scrape data for each app ID in the list
     scrape_steamcharts_batch(filtered_app_ids)
 
-main()
+# main()

@@ -121,4 +121,4 @@ def main():
             json.dump(game_histories, file, indent=4)  # indent=4 makes the JSON human-readable
 
 
-main()
+# main()

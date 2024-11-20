@@ -126,5 +126,5 @@ def main():
     print("Data loaded successfully!")
 
 
-main()
+# main()
 

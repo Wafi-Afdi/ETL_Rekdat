@@ -68,4 +68,4 @@ def main():
     else:
         print("Failed to extract stock data.")
         
-main()
+# main()

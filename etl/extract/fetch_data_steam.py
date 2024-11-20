@@ -52,4 +52,4 @@ def main():
     fetch_and_save_data(app_ids)
 
     
-main()
+# main()
