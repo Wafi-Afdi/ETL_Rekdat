@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 import os
 
 load_dotenv()
-
+FILE_PATH = os.getenv('FILE_PATH')
 API_KEY_ITAD_ = os.getenv('KMXNIJQWWLLILJQW')
 
 # Function to get game data from the API
@@ -116,7 +116,7 @@ def main():
     game_histories = process_game_histories(game_data_array)
     print("SELESAI2")
     if game_histories:
-        output_file = "game_histories.json"
+        output_file= os.path.join(FILE_PATH, "game_histories.json")
         with open(output_file, "w") as file:
             json.dump(game_histories, file, indent=4)  # indent=4 makes the JSON human-readable
 

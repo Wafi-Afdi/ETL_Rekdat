@@ -6,6 +6,8 @@ import os
 
 load_dotenv()
 
+FILE_PATH = os.getenv('FILE_PATH')
+
 # Replace with your Alpha Vantage API key
 ALPHA_VANTAGE_API_KEY = os.getenv('API_KEY_ALPHA')
 ALPHA_VANTAGE_URL = "https://www.alphavantage.co/query"
@@ -52,7 +54,7 @@ def main():
     stock_data_daily = extract_stock_price_daily(COMPANY_SYMBOL)
     if stock_data_daily:
         print("Extracted Data:", stock_data_daily)
-        output_file = "stock_daily.json"
+        output_file = os.path.join(FILE_PATH, "stock_daily.json")
         with open(output_file, "w") as file:
             json.dump(stock_data_daily, file, indent=4)  # indent=4 makes the JSON human-readable
     else:
@@ -60,7 +62,7 @@ def main():
     stock_data_monthly = extract_stock_price_monthly(COMPANY_SYMBOL)
     if stock_data_monthly:
         print("Stock Data Extracted")
-        output_file = "stock_monthly.json"
+        output_file = os.path.join(FILE_PATH, "stock_monthly.json")
         with open(output_file, "w") as file:
             json.dump(stock_data_monthly, file, indent=4)  # indent=4 makes the JSON human-readable
     else:

@@ -3,6 +3,14 @@ from bs4 import BeautifulSoup
 import csv
 import json
 import pandas as pd
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+FILE_PATH = os.getenv('FILE_PATH')
+
+
 def scrape_steamcharts_batch(app_ids):
     """
     Scrape SteamCharts data for a list of app IDs and save it to a single CSV file.
@@ -11,7 +19,7 @@ def scrape_steamcharts_batch(app_ids):
         app_ids (list): A list of Steam app IDs to scrape data for.
     """
     # Open a single CSV file to save the data for all apps
-    csv_file = 'steamcharts_batch_data.csv'
+    csv_file = os.path.join(FILE_PATH, 'steamcharts_batch_data.csv')
     with open(csv_file, mode='w', newline='', encoding='utf-8') as file:
         writer = csv.writer(file)
         # Write the header row

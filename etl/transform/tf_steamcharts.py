@@ -3,11 +3,27 @@ from sqlalchemy import create_engine
 import psycopg2
 from psycopg2.extras import execute_values
 import numpy as np
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+FILE_PATH = os.getenv('FILE_PATH')
+
+db_config = {
+    "dbname": os.getenv('DB_NAME'),
+    "user": os.getenv('DB_USER'),
+    "password": os.getenv('DB_PASSWORD'),
+    "host": os.getenv('DB_HOST'),
+    "port": os.getenv('DB_PORT'),
+    "sslmode": os.getenv("PG_SSLMODE", "verify-ca"),
+    "sslrootcert": os.getenv("PATH_TO_CA", "/path/to/ca.pem"),
+}
 
 
 def main():
 # Read the CSV file
-    df = pd.read_csv('steamcharts_batch_data.csv')
+    df = pd.read_csv(os.path.join(FILE_PATH, 'steamcharts_batch_data.csv'))
 
     # Clean and transform data
     # Remove % from "Percentage Gain" and convert to float
@@ -53,15 +69,11 @@ def main():
     })
 
     # Set up the database connection (replace with your database credentials)
-    engine = create_engine('postgresql://postgres:password@localhost:5432/rekdat')
+    #engine = create_engine('postgresql://postgres:password@localhost:5432/rekdat')
 
     # Database connection (replace with your credentials)
     conn = psycopg2.connect(
-        dbname="rekdat",
-        user="postgres",
-        password="password",
-        host="localhost",
-        port="5432"
+        **db_config
     )
 
     cursor = conn.cursor()

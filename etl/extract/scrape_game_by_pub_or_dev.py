@@ -6,6 +6,13 @@ from bs4 import BeautifulSoup
 import time
 import json
 import pandas as pd
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+FILE_PATH = os.getenv('FILE_PATH')
+
 
 def infinite_scroll(driver, pause_time=3):
     last_height = driver.execute_script("return document.body.scrollHeight")
@@ -84,6 +91,9 @@ def main():
     print(df)
     
     # Save to a new JSON file if needed
-    cleaned_json = df.to_dict(orient='records')
-    with open('cleaned_data.json', 'w') as f:
-        json.dump(cleaned_json, f, indent=4)
+    scraped_json = df.to_dict(orient='records')
+    scraped_data_path = os.path.join(FILE_PATH, 'scraped_steam_data.json')
+    with open(scraped_data_path, 'w') as f:
+        json.dump(scraped_json, f, indent=4)
+
+main()
