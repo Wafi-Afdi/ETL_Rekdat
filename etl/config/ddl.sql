@@ -24,14 +24,14 @@ CREATE TABLE steam_game (
 
 CREATE TABLE genres (
     genre_id SERIAL PRIMARY KEY,         -- ID unik untuk genre
-    appid BIGINT REFERENCES games(appid) ON DELETE CASCADE,   -- Hubungan dengan tabel games
+    appid BIGINT REFERENCES steam_game(appid) ON DELETE CASCADE,   -- Hubungan dengan tabel games
     genre VARCHAR(255) NOT NULL,
     UNIQUE (appid,genre)
 );
 
 CREATE TABLE languages (
     language_id SERIAL PRIMARY KEY,      -- ID unik untuk bahasa
-    appid BIGINT REFERENCES games(appid) ON DELETE CASCADE,  -- Hubungan dengan tabel games
+    appid BIGINT REFERENCES steam_game(appid) ON DELETE CASCADE,  -- Hubungan dengan tabel games
     language VARCHAR(255) NOT NULL,
     UNIQUE (language,appid)
 );
@@ -46,6 +46,6 @@ CREATE TABLE player_chart (
     percentage_gain DECIMAL(6, 4), -- Percentage gain as a decimal
     peak_players INT,             -- Peak number of players
     PRIMARY KEY (month, appId),   -- Composite primary key
-    FOREIGN KEY (appId) REFERENCES game(appId) ON DELETE CASCADE,
+    FOREIGN KEY (appId) REFERENCES steam_game(appId) ON DELETE CASCADE,
     UNIQUE (month,appId)
 );
