@@ -34,7 +34,7 @@ def fetch_and_save_data(app_array):
     print(f"Data saved to {output_file}")
 
 # Call the function to fetch and save data
-if __name__ == "__main__":
+def main():
     with open('cleaned_data.json', 'r') as f:
         cleaned_data = json.load(f)
     df = pd.DataFrame(cleaned_data)
@@ -43,3 +43,6 @@ if __name__ == "__main__":
     app_ids = filtered_df['appid'].tolist()
 
     fetch_and_save_data(app_ids)
+
+    
+main()

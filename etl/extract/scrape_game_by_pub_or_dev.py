@@ -70,19 +70,20 @@ def scrape_any_publisher(URL_site):
     
     return game_links
 
-# Run the scraper
-games = scrape_any_publisher("https://store.steampowered.com/publisher/DevolverDigital/#browse")
-
-# turn to json
-df = pd.DataFrame(games)
-
-# Convert 'release_date' to datetime format and reformat to YYYY-MM-DD
-df['release_date'] = pd.to_datetime(df['release_date'], format='%d %b, %Y').dt.strftime('%Y-%m-%d')
-
-# Display cleaned DataFrame
-print(df)
-
-# Save to a new JSON file if needed
-cleaned_json = df.to_dict(orient='records')
-with open('cleaned_data.json', 'w') as f:
-    json.dump(cleaned_json, f, indent=4)
+def main():
+    # Run the scraper
+    games = scrape_any_publisher("https://store.steampowered.com/publisher/DevolverDigital/#browse")
+    
+    # turn to json
+    df = pd.DataFrame(games)
+    
+    # Convert 'release_date' to datetime format and reformat to YYYY-MM-DD
+    df['release_date'] = pd.to_datetime(df['release_date'], format='%d %b, %Y').dt.strftime('%Y-%m-%d')
+    
+    # Display cleaned DataFrame
+    print(df)
+    
+    # Save to a new JSON file if needed
+    cleaned_json = df.to_dict(orient='records')
+    with open('cleaned_data.json', 'w') as f:
+        json.dump(cleaned_json, f, indent=4)

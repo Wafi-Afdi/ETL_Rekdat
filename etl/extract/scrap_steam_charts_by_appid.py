@@ -52,16 +52,17 @@ def scrape_steamcharts_batch(app_ids):
 
 # List of app IDs to scrape
 # Load the cleaned JSON data
-with open('cleaned_data.json', 'r') as f:
-    cleaned_data = json.load(f)
-
-# Convert JSON to DataFrame
-df = pd.DataFrame(cleaned_data)
-
-# Filter DataFrame to get appid for release_date after 2020
-df['release_date'] = pd.to_datetime(df['release_date'])  # Convert release_date back to datetime
-filtered_df = df[df['release_date'] > '2022-01-01']
-filtered_app_ids = filtered_df['appid'].tolist()
-
-# Scrape data for each app ID in the list
-scrape_steamcharts_batch(filtered_app_ids)
+def main():
+    with open('cleaned_data.json', 'r') as f:
+        cleaned_data = json.load(f)
+    
+    # Convert JSON to DataFrame
+    df = pd.DataFrame(cleaned_data)
+    
+    # Filter DataFrame to get appid for release_date after 2020
+    df['release_date'] = pd.to_datetime(df['release_date'])  # Convert release_date back to datetime
+    filtered_df = df[df['release_date'] > '2022-01-01']
+    filtered_app_ids = filtered_df['appid'].tolist()
+    
+    # Scrape data for each app ID in the list
+    scrape_steamcharts_batch(filtered_app_ids)

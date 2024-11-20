@@ -75,6 +75,8 @@ def insert_data_to_table(conn, df, table_name):
         conn.commit()
         print(f"Data berhasil dimasukkan ke tabel {table_name}.")
 
+
+
 # Baca data dari file CSV hasil transformasi
 daily_input = os.path.join(FILE_PATH, 'transformed_daily_data_with_date.csv')
 monthly_input = os.path.join(FILE_PATH, 'transformed_monthly_data_with_date.csv')
@@ -82,22 +84,23 @@ monthly_input = os.path.join(FILE_PATH, 'transformed_monthly_data_with_date.csv'
 daily_df = pd.read_csv(daily_input)
 monthly_df = pd.read_csv(monthly_input)
 
-# Koneksi ke database PostgreSQL
-try:
-    conn = psycopg2.connect(**db_config)
-    print("Berhasil terhubung ke database.")
-
-    # Membuat tabel jika belum ada
-    create_tables(conn)
-
-    # Memasukkan data ke tabel PostgreSQL
-    insert_data_to_table(conn, daily_df, "stock_daily")
-    insert_data_to_table(conn, monthly_df, "stock_monthly")
-
-except Exception as e:
-    print("Terjadi kesalahan:", e)
-
-finally:
-    if conn:
-        conn.close()
-        print("Koneksi ke database ditutup.")
+def main():
+    # Koneksi ke database PostgreSQL
+    try:
+        conn = psycopg2.connect(**db_config)
+        print("Berhasil terhubung ke database.")
+    
+        # Membuat tabel jika belum ada
+        create_tables(conn)
+    
+        # Memasukkan data ke tabel PostgreSQL
+        insert_data_to_table(conn, daily_df, "stock_daily")
+        insert_data_to_table(conn, monthly_df, "stock_monthly")
+    
+    except Exception as e:
+        print("Terjadi kesalahan:", e)
+    
+    finally:
+        if conn:
+            conn.close()
+            print("Koneksi ke database ditutup.")

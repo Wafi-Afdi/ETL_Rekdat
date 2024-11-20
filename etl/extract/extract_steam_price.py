@@ -101,7 +101,7 @@ def process_game_histories(game_dict):
     return all_game_histories
 
 # Call the process_app_ids function
-if __name__ == "__main__":
+def main():
     # Array of appids you want to look up
     with open('cleaned_data.json', 'r') as f:
         cleaned_data = json.load(f)
@@ -119,3 +119,6 @@ if __name__ == "__main__":
         output_file = "game_histories.json"
         with open(output_file, "w") as file:
             json.dump(game_histories, file, indent=4)  # indent=4 makes the JSON human-readable
+
+
+main()

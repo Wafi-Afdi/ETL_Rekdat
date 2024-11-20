@@ -48,7 +48,7 @@ def extract_stock_price_monthly(symbol="EA"):
 
 
 # Test the extract function
-if __name__ == "__main__":
+def main():
     stock_data_daily = extract_stock_price_daily(COMPANY_SYMBOL)
     if stock_data_daily:
         print("Extracted Data:", stock_data_daily)
@@ -65,3 +65,5 @@ if __name__ == "__main__":
             json.dump(stock_data_monthly, file, indent=4)  # indent=4 makes the JSON human-readable
     else:
         print("Failed to extract stock data.")
+        
+main()
