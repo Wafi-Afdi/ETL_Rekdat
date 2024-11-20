@@ -71,4 +71,4 @@ def main():
     daily_df.to_csv(daily_output_path, index=False)
     monthly_df.to_csv(monthly_output_path, index=False)
 
-main()
+# main()
