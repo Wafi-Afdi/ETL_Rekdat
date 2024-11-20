@@ -21,6 +21,43 @@ CREATE TABLE steam_game (
     release_date DATE                  -- Tanggal rilis
 );
 
+CREATE TABLE IF NOT EXISTS stock_monthly (
+    date DATE,
+    open FLOAT,
+    high FLOAT,
+    low FLOAT,
+    close FLOAT,
+    volume BIGINT,
+    monthly_change FLOAT,
+    monthly_range FLOAT,
+    symbol VARCHAR(10),
+    PRIMARY KEY (date, symbol),
+    UNIQUE(date, symbol)
+);
+
+CREATE TABLE IF NOT EXISTS stock_daily (
+    date DATE,
+    open FLOAT,
+    high FLOAT,
+    low FLOAT,
+    close FLOAT,
+    volume BIGINT,
+    daily_change FLOAT,
+    daily_range FLOAT,
+    symbol VARCHAR(10),
+    PRIMARY KEY (date, symbol),
+    UNIQUE(date, symbol)
+);
+
+CREATE TABLE game_price_history (
+    appid BIGINT NOT NULL,
+    timestamp TIMESTAMP WITH TIME ZONE NOT NULL,
+    price NUMERIC(10, 2) NOT NULL,
+    regular_price NUMERIC(10, 2) NOT NULL,
+    PRIMARY KEY (appid, timestamp),
+    FOREIGN KEY (appid) REFERENCES steam_game(appid)
+);
+
 
 CREATE TABLE genres (
     genre_id SERIAL PRIMARY KEY,         -- ID unik untuk genre

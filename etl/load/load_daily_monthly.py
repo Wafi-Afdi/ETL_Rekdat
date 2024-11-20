@@ -32,7 +32,8 @@ def create_tables(conn):
             daily_change FLOAT,
             daily_range FLOAT,
             symbol VARCHAR(10),
-            PRIMARY KEY (date, symbol)
+            PRIMARY KEY (date, symbol),
+            UNIQUE(date, symbol)
         );
         """
         cursor.execute(create_daily_table_query)
@@ -49,7 +50,8 @@ def create_tables(conn):
             monthly_change FLOAT,
             monthly_range FLOAT,
             symbol VARCHAR(10),
-            PRIMARY KEY (date, symbol)
+            PRIMARY KEY (date, symbol),
+            UNIQUE(date, symbol)
         );
         """
         cursor.execute(create_monthly_table_query)
