@@ -3,14 +3,14 @@ from airflow import DAG
 from airflow.operators.python import PythonOperator
 
 # Import functions from separate files
-from scrape_game import main as scrape_game
+from scrape_game_by_pub_or_dev import main as scrape_game
 from extract_steam_price import main as extract_steam_price
 from fetch_data_steam import main as fetch_data_steam
-from scrape_steam_chart import main as scrape_steam_chart
+from scrap_steam_charts_by_appid import main as scrape_steam_chart
 from tf_steam_price import main as tf_steam_price
-from tf_data_steam import main as tf_data_steam
-from tf_steam_chart import main as tf_steam_chart
-from fetch_stock import main as fetch_stock
+from tf_steam_data import main as tf_data_steam
+from tf_steamcharts import main as tf_steam_chart
+from fetch_stocks_alpha_vintage import main as fetch_stock
 from transform_daily_monthly import main as transform_daily_monthly
 from load_daily_monthly import main as load_daily_monthly
 
