@@ -73,6 +73,8 @@ def main():
     genres_df = process_column_data(merged_data, "genre", "genre")
     languages_df = process_column_data(merged_data, "languages", "language")
     merged_data = merged_data.drop(columns=["tags", "genre", "languages"])
+    merged_data.replace('', None, inplace=True)
+
 
     # Connect to PostgreSQL
     conn = psycopg2.connect(
@@ -81,6 +83,7 @@ def main():
 
     # Insert data into tables
     insert_with_conflict_handling(conn, "steam_game", merged_data, ["appid"])
+    #print("JALAN")
     insert_with_conflict_handling(conn, "genres", genres_df, ["appid", "genre"])
     insert_with_conflict_handling(conn, "languages", languages_df, ["appid", "language"])
 

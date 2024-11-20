@@ -27,9 +27,9 @@ def fetch_and_save_data(app_array):
 
             app_data.append(data)
 
-            # Wait 2 seconds before making the next request to avoid rate limiting
-            print(f"Successfully fetched {appid}, Waiting 2 seconds till next fetch")
-            time.sleep(2)
+            # Wait 0.5 seconds before making the next request to avoid rate limiting
+            print(f"Successfully fetched {appid}, Waiting 0.5 seconds till next fetch")
+            time.sleep(0.5)
 
         except Exception as e:
             print(f"Error fetching data for appid {appid}: {e}")

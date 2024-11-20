@@ -11,7 +11,7 @@ import os
 
 load_dotenv()
 FILE_PATH = os.getenv('FILE_PATH')
-API_KEY_ITAD_ = os.getenv('KMXNIJQWWLLILJQW')
+API_KEY_ITAD_ = os.getenv('API_KEY_ITAD')
 
 # Function to get game data from the API
 def get_game_id(app_id):
@@ -20,7 +20,7 @@ def get_game_id(app_id):
         response = requests.get(f'https://api.isthereanydeal.com/games/lookup/v1', 
                                 params={'key': API_KEY_ITAD_, 'appid': app_id})
         data = response.json()
-        if data.get('status_code') != 200:
+        if response.status_code != 200:
             raise Exception(data['reason_phrase'])
         if data.get('found'):
             return data['game']['id']  # Return the game id if found
@@ -38,8 +38,8 @@ def process_app_ids(app_ids_):
         game_data = get_game_id(app_id)
         if game_data:
             game_data_dict[game_data] = app_id # Store the game data in an array
-        print(f"Waiting 2 seconds before next request...")
-        time.sleep(2)  # Sleep for 2 seconds before making the next request
+        print(f"Waiting 1 seconds before next request...")
+        time.sleep(1)  # Sleep for 1 seconds before making the next request
     
     print(game_data_dict)
     return game_data_dict
@@ -53,7 +53,7 @@ def get_game_price_history(game_id, since="2022-01-01T00:00:00Z", shops="61"):
                                 params={'key': API_KEY_ITAD_, 'id': game_id, 'shops': shops, 'since': since})
         data = response.json()
         # Check if the response contains valid data
-        if data.get('status_code') != 200:
+        if response.status_code != 200:
             raise Exception(data['reason_phrase'])
         if data:
             return data
@@ -103,12 +103,12 @@ def process_game_histories(game_dict):
 # Call the process_app_ids function
 def main():
     # Array of appids you want to look up
-    with open('cleaned_data.json', 'r') as f:
+    with open(os.path.join(FILE_PATH, "scraped_steam_data.json"), 'r') as f:
         cleaned_data = json.load(f)
     df = pd.DataFrame(cleaned_data)
     df['release_date'] = pd.to_datetime(df['release_date'])  # Convert release_date back to datetime
-    filtered_df = df[df['release_date'] > '2023-09-17']
-    app_ids = filtered_df['appid'].tolist()
+    #filtered_df = df[df['release_date'] > '2023-09-17']
+    app_ids = df['appid'].tolist()
 
 
     game_data_array = process_app_ids(app_ids)

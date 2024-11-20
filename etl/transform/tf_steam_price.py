@@ -7,12 +7,13 @@ import os
 
 
 
+load_dotenv()
+FILE_PATH = os.getenv('FILE_PATH')
 
 
 def main():
-    load_dotenv()
     # Read JSON data
-    with open('game_price_history.json', 'r') as f:
+    with open(os.path.join(FILE_PATH, 'game_histories.json')) as f:
         data = json.load(f)
 
     # Konfigurasi koneksi ke database PostgreSQL
@@ -22,8 +23,7 @@ def main():
         "password": os.getenv('DB_PASSWORD'),
         "host": os.getenv('DB_HOST'),
         "port": os.getenv('DB_PORT'),
-        "sslmode": os.getenv("PG_SSLMODE", "verify-ca"),
-        "sslrootcert": os.getenv("PATH_TO_CA", "/path/to/ca.pem"),
+        "sslmode" : "require",
     }
 
     # Prepare data for insertion

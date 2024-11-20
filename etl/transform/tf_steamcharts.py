@@ -16,8 +16,7 @@ db_config = {
     "password": os.getenv('DB_PASSWORD'),
     "host": os.getenv('DB_HOST'),
     "port": os.getenv('DB_PORT'),
-    "sslmode": os.getenv("PG_SSLMODE", "verify-ca"),
-    "sslrootcert": os.getenv("PATH_TO_CA", "/path/to/ca.pem"),
+    "sslmode": 'require'
 }
 
 
