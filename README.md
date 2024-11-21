@@ -1,7 +1,5 @@
 # KELOMPOK Om Gabe
 
-This project is developed by **KELOMPOK Om Gabe**.
-
 ## Team Members
 
 1. **Wafi Afdi Alfaruqhi** - 22/503393/TK/55000  
@@ -15,7 +13,7 @@ This project is developed by **KELOMPOK Om Gabe**.
 
 ## Latar Belakang Proyek
 
-ada proyek ini, kita akan mencoba untuk membuat ETL (Extract, Transform, Load) Pipeline untuk dapat mendapatkan data saham dan data dari steam. Proyek ini akan didukung oleh teknologi Pandas, Selenium, BeautifulSoup, Airflow, PostgreSQL, dan Azure. Sumber data akan diekstrak melalui web scrapping dan juga API publik. Data ditransform agar bersih dan siap untuk di load pada database PostgreSQL. Visualisasi data akan dilakukan dengan Tableue. Airflow akan membantu agar proses ETL dilakukan secara berkala dalam waktu setiap bulannya.
+Pada proyek ini, kita akan mencoba untuk membuat ETL (Extract, Transform, Load) Pipeline untuk dapat mendapatkan data saham dan data dari steam. Proyek ini akan didukung oleh teknologi Pandas, Selenium, BeautifulSoup, Airflow, PostgreSQL, dan Azure. Sumber data akan diekstrak melalui web scrapping dan juga API publik. Data ditransform agar bersih dan siap untuk di load pada database PostgreSQL. Visualisasi data akan dilakukan dengan Tableue. Airflow akan membantu agar proses ETL dilakukan secara berkala dalam waktu setiap bulannya.
 
 ## Getting Started
 
