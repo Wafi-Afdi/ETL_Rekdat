@@ -79,9 +79,9 @@ CREATE TABLE languages (
 CREATE TABLE player_chart (
     month DATE NOT NULL,          -- Represents the month
     appId BIGINT NOT NULL,        -- Foreign key referencing the game table
-    average_players DECIMAL(10, 2), -- Average number of players
-    gain DECIMAL(10, 2),          -- Gain in player count
-    percentage_gain DECIMAL(6, 4), -- Percentage gain as a decimal
+    average_players DECIMAL(20, 2), -- Average number of players
+    gain DECIMAL(20, 2),          -- Gain in player count
+    percentage_gain DECIMAL(10, 6), -- Percentage gain as a decimal
     peak_players INT,             -- Peak number of players
     PRIMARY KEY (month, appId),   -- Composite primary key
     FOREIGN KEY (appId) REFERENCES steam_game(appId) ON DELETE CASCADE,

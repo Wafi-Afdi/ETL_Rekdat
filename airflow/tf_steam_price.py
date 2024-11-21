@@ -12,7 +12,7 @@ FILE_PATH = os.getenv('FILE_PATH')
 def main():
     load_dotenv()
     # Read JSON data
-    file_location_price_history = os.path.join(FILE_PATH, 'steamspy_metadata.json')
+    file_location_price_history = os.path.join(FILE_PATH, 'game_price_histoy.json')
     with open(file_location_price_history, 'r') as f:
         data = json.load(f)
 
