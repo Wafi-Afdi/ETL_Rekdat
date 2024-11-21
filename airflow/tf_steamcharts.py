@@ -16,8 +16,7 @@ db_config = {
     "password": os.getenv('DB_PASSWORD'),
     "host": os.getenv('DB_HOST'),
     "port": os.getenv('DB_PORT'),
-    "sslmode": os.getenv("PG_SSLMODE", "verify-ca"),
-    "sslrootcert": os.getenv("PATH_TO_CA", "/path/to/ca.pem"),
+    "sslmode": "require"
 }
 
 
@@ -77,15 +76,6 @@ def main():
     )
 
     cursor = conn.cursor()
-
-    game_df.head()
-
-    # menghindari duplication pada tabel games
-    game_query = """
-    INSERT INTO steam_game (appid) VALUES %s
-    ON CONFLICT (appid) DO NOTHING;
-    """
-    execute_values(cursor, game_query, [(row['appid'],) for _, row in game_df.iterrows()])
 
     # menghindari duplication pada tabel player_chart
     player_chart_query = """

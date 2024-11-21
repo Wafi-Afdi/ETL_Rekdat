@@ -29,7 +29,7 @@ with DAG(
     dag_id='etl_pipeline_steam',
     default_args=default_args,
     description='An ETL pipeline for Steam and stock data',
-    schedule_interval=timedelta(days=1),
+    schedule_interval='@monthly',
     start_date=datetime(2024, 11, 20),
     catchup=False,
 ) as dag:

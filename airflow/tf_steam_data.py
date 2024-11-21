@@ -27,10 +27,17 @@ def load_json_data(file_path):
 
 # Insert data into PostgreSQL with `ON CONFLICT DO NOTHING`
 def insert_with_conflict_handling(conn, table_name, data, conflict_columns):
+    print(data.columns.tolist())
     cursor = conn.cursor()
     columns = ', '.join(data.columns)
     values = ', '.join([f"%({col})s" for col in data.columns])
-    conflict_clause = f"ON CONFLICT ({', '.join(conflict_columns)}) DO NOTHING"
+
+    # Dynamically create the update clause only if there are columns to update
+    update_clause = ', '.join([f"{col} = EXCLUDED.{col}" for col in data.columns if col not in conflict_columns])
+    if update_clause:
+        conflict_clause = f"ON CONFLICT ({', '.join(conflict_columns)}) DO UPDATE SET {update_clause}"
+    else:
+        conflict_clause = f"ON CONFLICT ({', '.join(conflict_columns)}) DO NOTHING"  # Fallback if no update clause is needed
 
     query = f"""
         INSERT INTO {table_name} ({columns})
@@ -47,6 +54,7 @@ def insert_with_conflict_handling(conn, table_name, data, conflict_columns):
         print(f"Error inserting into {table_name}: {e}")
         conn.rollback()
 
+
 # Main function
 def main():
     # Load data
@@ -57,10 +65,18 @@ def main():
     merged_data = pd.merge(steam_data, cleaned_data, on="appid", how="inner")
     merged_data["discount"] = merged_data["discount"].fillna(0).replace([np.inf, -np.inf], 0).astype(int)
     merged_data["price"] = merged_data["price"].astype(float) / 100
-    merged_data["initialprice"] = merged_data["initialprice"].astype(float) / 100
     merged_data["release_date"] = pd.to_datetime(merged_data["release_date"])
+    merged_data['appid'] = pd.to_numeric(merged_data['appid'], errors='coerce')
+    merged_data['initialprice'] = pd.to_numeric(merged_data['initialprice'], errors='coerce').fillna(0).astype(float) / 100  # Ensure no NaNs
+    merged_data['discount'] = pd.to_numeric(merged_data['discount'], errors='coerce').fillna(0).astype(int)  # Ensure no NaNs, cast to int
+    merged_data['score_rank'] = None
+
     merged_data = merged_data.where(pd.notnull(merged_data), None)  # Replace NaN with None
-    merged_data["stock_symbol"] = STOCK_SYMBOL
+
+    stock_sym = None
+    if STOCK_SYMBOL != "-":
+        stock_sym = STOCK_SYMBOL
+    merged_data["stock_symbol"] = stock_sym
 
     # Process genres and languages
     def process_column_data(merged_data, column_name, new_column_name):
@@ -88,5 +104,4 @@ def main():
 
     # Close connection
     conn.close()
-
 

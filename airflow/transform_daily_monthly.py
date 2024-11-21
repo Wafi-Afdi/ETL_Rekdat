@@ -11,6 +11,19 @@ def main():
     daily_input_path = os.path.join(FILE_PATH, 'stock_daily.json')
     monthly_input_path = os.path.join(FILE_PATH, 'stock_monthly.json')
 
+    # Check if both files exist
+    if os.path.exists(daily_input_path):
+        print(f"File {daily_input_path} exists.")
+    else:
+        print(f"File {daily_input_path} does not exist, process has stopped")
+        return
+
+    if os.path.exists(monthly_input_path):
+        print(f"File {monthly_input_path} exists.")
+    else:
+        print(f"File {monthly_input_path} does not exist, process has stopped")
+        return
+
     # Load data harian dan bulanan
     with open(daily_input_path, 'r') as daily_file:
         daily_data = json.load(daily_file)

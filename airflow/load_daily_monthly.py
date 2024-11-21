@@ -86,6 +86,19 @@ def main():
     # Baca data dari file CSV hasil transformasi
     daily_input = os.path.join(FILE_PATH, 'transformed_daily_data_with_date.csv')
     monthly_input = os.path.join(FILE_PATH, 'transformed_monthly_data_with_date.csv')
+    # Check if both files exist
+    if os.path.exists(daily_input):
+        print(f"File {daily_input} exists.")
+    else:
+        print(f"File {daily_input} does not exist, process has stopped")
+        return
+
+    if os.path.exists(monthly_input):
+        print(f"File {monthly_input} exists.")
+    else:
+        print(f"File {monthly_input} does not exist, process has stopped")
+        return
+    
     daily_df = pd.read_csv(daily_input)
     monthly_df = pd.read_csv(monthly_input)
     conn = psycopg2.connect(**db_config)

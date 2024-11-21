@@ -56,7 +56,7 @@ CREATE TABLE game_price_history (
     price NUMERIC(10, 2) NOT NULL,
     regular_price NUMERIC(10, 2) NOT NULL,
     PRIMARY KEY (appid, timestamp),
-    FOREIGN KEY (appid) REFERENCES steam_game(appid)
+    FOREIGN KEY (appid) REFERENCES steam_game(appid) ON DELETE CASCADE
 );
 
 

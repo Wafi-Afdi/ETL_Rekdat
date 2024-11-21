@@ -6,13 +6,14 @@ import os
 
 
 
-
+FILE_PATH = os.getenv('FILE_PATH')
 
 
 def main():
     load_dotenv()
     # Read JSON data
-    with open('game_price_history.json', 'r') as f:
+    file_location_price_history = os.path.join(FILE_PATH, 'steamspy_metadata.json')
+    with open(file_location_price_history, 'r') as f:
         data = json.load(f)
 
     # Konfigurasi koneksi ke database PostgreSQL
@@ -22,8 +23,7 @@ def main():
         "password": os.getenv('DB_PASSWORD'),
         "host": os.getenv('DB_HOST'),
         "port": os.getenv('DB_PORT'),
-        "sslmode": os.getenv("PG_SSLMODE", "verify-ca"),
-        "sslrootcert": os.getenv("PATH_TO_CA", "/path/to/ca.pem"),
+        "sslmode": "require",
     }
 
     # Prepare data for insertion
@@ -58,3 +58,4 @@ def main():
     # Close connection
     cursor.close()
     conn.close()
+    print("Proses upload data berhasil")
