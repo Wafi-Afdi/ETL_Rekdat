@@ -90,4 +90,9 @@ with DAG(
     task_extract_steam_price >> task_tf_steam_price
     task_fetch_data_steam >> task_tf_data_steam
     task_scrape_steam_chart >> task_tf_steam_chart
+    
+    # Adjusted Dependencies: task_tf_data_steam must complete before task_tf_steam_price and task_tf_steam_chart
+    task_tf_data_steam >> [task_tf_steam_price, task_tf_steam_chart]
+    
+    # Continue other task dependencies
     task_fetch_stock >> task_transform_daily_monthly >> task_load_daily_monthly

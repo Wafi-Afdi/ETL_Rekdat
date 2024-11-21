@@ -7,7 +7,7 @@
 3. **Nur Rochman** - 22/493623/TK/54086  
 
 ## Links
-[Video Presentasi](https://youtube.com)
+[Video Demonstrasi](https://www.youtube.com/watch?v=c4gGS7nHrBo)
 
 [Blog Proyek](https://wafiafdialfaruqhi.notion.site/ETL-Pipeline-Publisher-Stock-and-Steam-Game-Data-144a84a3d51e80d3b13cf01c0dc0f655?pvs=4)
 
