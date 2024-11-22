@@ -11,6 +11,8 @@
 
 [Blog Proyek](https://wafiafdialfaruqhi.notion.site/ETL-Pipeline-Publisher-Stock-and-Steam-Game-Data-144a84a3d51e80d3b13cf01c0dc0f655?pvs=4)
 
+[Video Presentasi](https://drive.google.com/file/d/1cjp551cJCt_NLLXVTX2lrKpMv3eDv4fR/view?usp=sharing)
+
 ## Latar Belakang Proyek
 
 Pada proyek ini, kita akan mencoba untuk membuat ETL (Extract, Transform, Load) Pipeline untuk dapat mendapatkan data saham dan data dari steam. Proyek ini akan didukung oleh teknologi Pandas, Selenium, BeautifulSoup, Airflow, PostgreSQL, dan Azure. Sumber data akan diekstrak melalui web scrapping dan juga API publik. Data ditransform agar bersih dan siap untuk di load pada database PostgreSQL. Visualisasi data akan dilakukan dengan Tableue. Airflow akan membantu agar proses ETL dilakukan secara berkala dalam waktu setiap bulannya.
